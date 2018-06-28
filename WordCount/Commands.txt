@@ -1,0 +1,12 @@
+//Create topics
+kafka-topics --create --topic word-count-input --replication-factor 1 --partitions 1 --zookeeper localhost:2181
+kafka-topics --create --topic word-count-output --replication-factor 1 --partitions 1 --zookeeper localhost:2181
+
+//Run Java Application
+
+//Run producer
+kafka-console-producer.bat --broker-list localhost:9093 --topic word-count-input
+
+
+//Run Consumer
+kafka-console-consumer.bat --bootstrap-server localhost:9093 --topic word-count-output --from-beginning --property print.key=true --property print.value=true --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
